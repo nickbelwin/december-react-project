@@ -7,31 +7,34 @@ import SearchBar from "../../components/searchbar";
 import Header from "../../components/header";
 import 'remixicon/fonts/remixicon.css'
 import Button from "../../components/button";
+import { debounce } from "../../utils";
+import Loader from "../../components/loader";
+import Empty from "../../components/empty";
 
 function Home(){
     const [productsList, setProductsList]= useState({});
     const [searching, setSearching]= useState("");
-    async function getProducts(searching){
-        console.log(searching);
+    const [loader, setLoader]= useState(true);
+    async function getProducts(searchdata){
+        console.log(searchdata);
+        setLoader(true);
         try{
-            let getdata= await fetch( searching? `https://dummyjson.com/products/search?q=${searching}`: GET_PRODUCT_DATA);
+            let getdata= await fetch( searchdata? `https://dummyjson.com/products/search?q=${searchdata}`: GET_PRODUCT_DATA);
             let data= await getdata.json();
             setProductsList(data);
         }catch(error){
             console.error("Error:: ",error);
         }
+        setLoader(false);
     }
     function getSearchProducts(e){
         console.log(e.target.value);
-        if(e.target.value){
-            setSearching(e.target.value)
-            getProducts(searching);
-        }
-        else{
-            setSearching("");
-            getProducts(searching);
-        }
+        setSearching(e.target.value);
+        let url= e.target.value? 
+            searching : "";
+        getProducts(url);
     }
+    const getDebounce= debounce(getSearchProducts,1000);
     useEffect(()=>{
         getProducts();
     }, []);
@@ -42,12 +45,12 @@ function Home(){
                 <select>
                     <option value="">Mumbai</option>
                 </select>
-                <SearchBar classes="search" text="Search" inputEvent={getSearchProducts} />
+                <SearchBar classes="search" text="Search" inputEvent={getDebounce} />
                 <Button classes="login" text="Login" />
                 <button className="cart">My<span>_</span>Cart</button>
             </header>
             <div className="productList">
-            {productsList?.products && Array.isArray(productsList?.products) && productsList?.products.map((val)=>{
+            {!loader && productsList?.products && productsList?.products.length >= 1 && Array.isArray(productsList?.products) ? (productsList?.products.map((val)=>{
                return <ProductCard key={val.id}
                 imageUrl={val.thumbnail}
                 title={val.title}
@@ -55,7 +58,16 @@ function Home(){
                 rating={val.rating}
                 discount={val.discountPercentage}
                 />
-            })}
+            })
+            ) : loader? 
+            (<Loader/>) :
+            (<Empty
+                classname="empty"
+                url="/notFound.webp"
+                title={"No Products Found"}
+                discription={"Your Search did not match any Products, Please Try again"}
+            />)
+            }
             </div>
         </div>
     );

@@ -5,7 +5,7 @@ import { useState } from "react";
 function SearchBar(props){
     const {classes, inputEvent, text}=props;
     return(
-            <input type="text" className={classes} onInput={inputEvent} placeholder="Search here..." />
+            <input type="text" className={classes} onChange={inputEvent} placeholder="Search here..." />
     );
 }
 export default SearchBar;
