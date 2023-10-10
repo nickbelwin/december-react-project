@@ -1,0 +1,1 @@
+export const GET_PRODUCT_DATA="https://dummyjson.com/products/";

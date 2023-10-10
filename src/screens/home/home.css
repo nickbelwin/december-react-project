@@ -1,0 +1,60 @@
+.homeDiv .productList{
+    padding: 2rem;
+    /* padding-top: 9rem; */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+}
+
+.head{
+    background-color: rgb(93, 1, 150);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 4rem;
+    gap: 2vw;
+    margin-bottom: 2rem;
+}
+.head h1{
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: rgb(255, 0, 115);
+}
+.head select{
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-weight: 600;
+    padding: .5rem;
+    font-size: 1.2rem;
+}
+.search{
+    padding: .9rem 1.8rem;
+    border-radius: 7px;
+    border: none;
+    width: 50vw;
+}
+.login{
+    background-color: transparent;
+    color: white;
+    font-weight: 600;
+    border: none;
+    padding: 1rem 1.5rem;
+    border-radius: 7px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+.cart{
+    background-color: rgb(255, 0, 115);
+    color: white;
+    font-weight: 200;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 7px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+.cart span{
+    color: rgb(255, 0, 115);
+}

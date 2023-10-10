@@ -1,7 +1,17 @@
+*{
+  margin: 0;
+}
+html, body{
+  margin: 0;
+}
 .App {
   text-align: center;
+  background-color: #ffffff;
 }
-
+.App h2{
+  padding: 1rem 0;
+  color: white;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
